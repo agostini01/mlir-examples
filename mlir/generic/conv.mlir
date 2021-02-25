@@ -51,10 +51,8 @@ func @main() {
 
 #conv_trait = {
   indexing_maps = #conv_accesses,
-  // iterator_types = ["window", "window", "window", "window", "window", 
-  //                   "window", "window"]
-  iterator_types = ["parallel", "parallel", "parallel", "parallel", "reduction", 
-                    "window", "window"]
+  iterator_types = ["parallel", "parallel", "parallel", "parallel", 
+                    "reduction", "window", "window"]
 }
 
 func @generic_conv(%filter: memref<?x?x?x?xf32>,
@@ -63,7 +61,7 @@ func @generic_conv(%filter: memref<?x?x?x?xf32>,
   linalg.generic #conv_trait 
     ins(%filter, %input : memref<?x?x?x?xf32>, memref<?x?x?x?xf32>) 
     outs(%output : memref<?x?x?x?xf32>) {
-  ^bb0(%arg0: f32, %arg1: f32, %arg2: f32):  // no predecessors
+  ^bb0(%arg0: f32, %arg1: f32, %arg2: f32):
     %3 = mulf %arg0, %arg1 : f32
     %4 = addf %3, %arg2 : f32
     linalg.yield %4 : f32

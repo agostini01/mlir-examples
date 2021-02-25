@@ -43,8 +43,8 @@ func @main() {
   iterator_types = ["parallel", "parallel","reduction"]
 }
 
-func @my_matmul(%A: memref<?x?xf32>, %B: memref<?x?xf32>, %C: memref<?x?xf32>){
-  
+func @my_matmul(%A: memref<?x?xf32>, %B: memref<?x?xf32>, 
+                %C: memref<?x?xf32>){
   linalg.generic #matmul_trait
     ins(%A, %B : memref<?x?xf32>, memref<?x?xf32>)
     outs(%C : memref<?x?xf32>) {

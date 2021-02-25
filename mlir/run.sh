@@ -50,8 +50,9 @@ set -x
 # $BDIR/mlir-opt $INPUT -linalg-generalize-named-ops -o tmp.mlir
 $BDIR/mlir-opt $INPUT -o tmp.mlir
 
-$BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-loops -o tmp1.mlir
-# $BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-affine-loops -o tmp1.mlir
+# $BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-loops -o tmp1.mlir
+$BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-affine-loops -o tmp1.mlir
+# $BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-affine-loops --affine-loop-unroll -o tmp1.mlir
 # $BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-llvm -o tmp1.mlir
 
 $BDIR/mlir-opt tmp1.mlir --func-bufferize --tensor-constant-bufferize --tensor-bufferize --finalizing-bufferize -o tmp2.mlir
