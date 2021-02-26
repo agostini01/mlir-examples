@@ -1,5 +1,9 @@
+# NICO's collection of MLIR examples
+
 This project contains some examples of how to compile and run mlir files with
-`linalg` and `affine` dialect operations.
+`linalg` and `affine` dialect operations. Some examples are inspired by tests
+present on the MLIR project others were handcoded to implement specific
+algorithms.
 
 Before running the examples you must:
 
