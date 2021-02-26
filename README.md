@@ -21,7 +21,7 @@ NOTE: Some intermediate files will be generated on the folder that you run the
 `run.sh`. Take a look at them if you are interested on intermediate steps.
 
 NOTE2: Some mlir files have a comment on top stating if the files cannot be
-compile and why there is a problem.
+compiled and why there is a problem.
 
 NOTE3: Most of the code was developed using llvm-project commit
 `da59c2e4dc1c7b502cc2098247b2ee38ac297e0c`. MLIR is moving fast, so there may be
