@@ -30,7 +30,7 @@ func @main() {
   %output = call @alloc_4d_filled_f32(%c1, %c5, %c5, %c1, %v0) : 
     (index, index, index, index, f32) -> (memref<?x?x?x?xf32>)
 
-  // This call arguments are filter(CHWO), input(NHWC), output(NHWO)
+  //   filter(kH,kW,C,O), input(N,H,W,C), output(N,H,W,O)
   linalg.conv(%filter, %input, %output) {
       dilations = [1,1],
       strides = [1,1],
