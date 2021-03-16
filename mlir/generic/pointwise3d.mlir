@@ -56,17 +56,17 @@ func @pointwise(%arg0: memref<?x?x?xf32>, %arg1: memref<?x?x?xf32>, %arg2: memre
 
 /// Allocates a data structure with value %f on its main diagonal
 func private @alloc_3d_identity_f32(%s1 : index, %s2 : index, %s3 : index,%f : f32) -> memref<?x?x?xf32> {
-  %buf = alloc(%s1, %s2, %s3) : memref<?x?x?xf32> 
+  %buf = memref.alloc(%s1, %s2, %s3) : memref<?x?x?xf32> 
   %c0 = constant 0.0 : f32 
   %c1 = constant 1.0 : f32
   affine.for %i = 0 to %s1 {
     affine.for %j = 0 to %s2 {
       affine.for %k = 0 to %s3 {
         affine.if #set_identity (%i,%j,%k){
-          store %f, %buf[%i, %j, %k] : memref<?x?x?xf32>
+          memref.store %f, %buf[%i, %j, %k] : memref<?x?x?xf32>
         }
         else {
-          store %c0, %buf[%i, %j, %k] : memref<?x?x?xf32>
+          memref.store %c0, %buf[%i, %j, %k] : memref<?x?x?xf32>
         }
       }
     }
@@ -75,7 +75,7 @@ func private @alloc_3d_identity_f32(%s1 : index, %s2 : index, %s3 : index,%f : f
 }
 
 func private @alloc_3d_filled_f32(%s1 : index, %s2 : index, %s3 : index, %f : f32) -> memref<?x?x?xf32> {
-  %buf = alloc(%s1, %s2, %s3) : memref<?x?x?xf32>
+  %buf = memref.alloc(%s1, %s2, %s3) : memref<?x?x?xf32>
   linalg.fill(%buf, %f) : memref<?x?x?xf32>, f32
   return %buf : memref<?x?x?xf32>
 }

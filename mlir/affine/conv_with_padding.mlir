@@ -13,13 +13,13 @@ module  {
     %in = call @alloc_4d_filled_f32(%c1, %c5, %c5, %c1, %cst) : (index, index, index, index, f32) -> memref<?x?x?x?xf32>
     %fil = call @alloc_4d_filled_f32(%c3, %c3, %c1, %c1, %cst_fil_val) : (index, index, index, index, f32) -> memref<?x?x?x?xf32>
     %out = call @alloc_4d_filled_f32(%c1, %c5, %c5, %c1, %cst_zero) : (index, index, index, index, f32) -> memref<?x?x?x?xf32>
-    %kH = dim %fil, %c0 : memref<?x?x?x?xf32>
-    %kW = dim %fil, %c1 : memref<?x?x?x?xf32>
-    %C = dim %fil, %c2 : memref<?x?x?x?xf32>
-    %O = dim %fil, %c3 : memref<?x?x?x?xf32>
-    %N = dim %in, %c0 : memref<?x?x?x?xf32>
-    %H = dim %out, %c1 : memref<?x?x?x?xf32>
-    %W = dim %out, %c2 : memref<?x?x?x?xf32>
+    %kH = memref.dim %fil, %c0 : memref<?x?x?x?xf32>
+    %kW = memref.dim %fil, %c1 : memref<?x?x?x?xf32>
+    %C = memref.dim %fil, %c2 : memref<?x?x?x?xf32>
+    %O = memref.dim %fil, %c3 : memref<?x?x?x?xf32>
+    %N = memref.dim %in, %c0 : memref<?x?x?x?xf32>
+    %H = memref.dim %out, %c1 : memref<?x?x?x?xf32>
+    %W = memref.dim %out, %c2 : memref<?x?x?x?xf32>
     affine.for %n = 0 to %N {
       affine.for %i_H = 0 to %H {
         affine.for %j_W = 0 to %W {
@@ -31,8 +31,8 @@ module  {
                   %j_input = affine.apply #map0(%j_W, %j_kW)
                   %i_cliped = affine.max #map1(%i_input)
                   %j_cliped = affine.max #map1(%j_input)
-                  %dim_H = dim %in, %c1 : memref<?x?x?x?xf32>
-                  %dim_W = dim %in, %c2 : memref<?x?x?x?xf32>
+                  %dim_H = memref.dim %in, %c1 : memref<?x?x?x?xf32>
+                  %dim_W = memref.dim %in, %c2 : memref<?x?x?x?xf32>
                   %is_i_lt_than_zero = cmpi slt, %i_input, %c0 : index
                   %is_i_ge_than_H = cmpi sge, %i_input, %dim_H : index
                   %is_outside_H_input = or %is_i_lt_than_zero, %is_i_ge_than_H : i1
@@ -42,7 +42,7 @@ module  {
                   %is_outside_of_input_bounds = or %18, %is_j_ge_than_W : i1
 
                   // Load input value or select zero if out of bounds
-                  %23 = load %in[%n, %i_cliped, %j_cliped, %channels_in] : memref<?x?x?x?xf32>
+                  %23 = memref.load %in[%n, %i_cliped, %j_cliped, %channels_in] : memref<?x?x?x?xf32>
                   %24 = select %is_outside_of_input_bounds, %cst_zero, %23 : f32
 
                   %25 = affine.load %fil[%i_kH, %j_kW, %channels_in, %channels_out] : memref<?x?x?x?xf32>
@@ -64,7 +64,7 @@ module  {
     return
   }
   func private @alloc_4d_filled_f32(%n: index, %i_H: index, %j_W: index, %channels_out: index, %channels_in: f32) -> memref<?x?x?x?xf32> {
-    %in = alloc(%n, %i_H, %j_W, %channels_out) : memref<?x?x?x?xf32>
+    %in = memref.alloc(%n, %i_H, %j_W, %channels_out) : memref<?x?x?x?xf32>
     affine.for %i_kH = 0 to %n {
       affine.for %j_kW = 0 to %i_H {
         affine.for %arg7 = 0 to %j_W {

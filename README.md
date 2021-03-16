@@ -24,5 +24,5 @@ NOTE2: Some mlir files have a comment on top stating if the files cannot be
 compiled and why there is a problem.
 
 NOTE3: Most of the code was developed using llvm-project commit
-`da59c2e4dc1c7b502cc2098247b2ee38ac297e0c`. MLIR is moving fast, so there may be
+`ff2dd8a21251ba0e6d284c9823ff1118a23b59ae`. MLIR is moving fast, so there may be
 files that are not working anymore, or others that are now fully supported.

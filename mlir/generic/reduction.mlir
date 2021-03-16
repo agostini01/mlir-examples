@@ -48,7 +48,7 @@ func @reduction(%arg0: memref<?xf32>, %arg2: memref<?xf32>) {
 }
 
 func private @alloc_1d_filled_f32(%s1 : index, %f : f32) -> memref<?xf32> {
-  %buf = alloc(%s1) : memref<?xf32>
+  %buf = memref.alloc(%s1) : memref<?xf32>
   linalg.fill(%buf, %f) : memref<?xf32>, f32
   return %buf : memref<?xf32>
 }

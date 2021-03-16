@@ -8,7 +8,7 @@
 
 
 func private @alloc_4d_filled_f32(%s1 : index, %s2 : index, %s3 : index, %s4 : index, %f : f32) -> memref<?x?x?x?xf32> {
-  %buf = alloc(%s1, %s2, %s3, %s4) : memref<?x?x?x?xf32> 
+  %buf =memref.alloc(%s1, %s2, %s3, %s4) : memref<?x?x?x?xf32> 
   linalg.fill(%buf, %f) : memref<?x?x?x?xf32>, f32
   return %buf : memref<?x?x?x?xf32>
 }

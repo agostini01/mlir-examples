@@ -52,7 +52,7 @@ module  {
 
   // Affine implementation of linalg.fill
   func private @alloc_4d_filled_f32(%arg0: index, %arg1: index, %arg2: index, %arg3: index, %arg4: f32) -> memref<?x?x?x?xf32> {
-    %0 = alloc(%arg0, %arg1, %arg2, %arg3) : memref<?x?x?x?xf32>
+    %0 = memref.alloc(%arg0, %arg1, %arg2, %arg3) : memref<?x?x?x?xf32>
     affine.for %arg5 = 0 to %arg0 {
       affine.for %arg6 = 0 to %arg1 {
         affine.for %arg7 = 0 to %arg2 {

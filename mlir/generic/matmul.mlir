@@ -57,7 +57,7 @@ func @my_matmul(%A: memref<?x?xf32>, %B: memref<?x?xf32>,
 }
 
 func private @alloc_2d_filled_f32(%arg0: index, %arg1: index, %arg2: f32) -> memref<?x?xf32> {
-  %0 = alloc(%arg0, %arg1) : memref<?x?xf32>
+  %0 = memref.alloc(%arg0, %arg1) : memref<?x?xf32>
   affine.for %arg3 = 0 to %arg0 {
     affine.for %arg4 = 0 to %arg1 {
       affine.store %arg2, %0[%arg3, %arg4] : memref<?x?xf32>
@@ -66,12 +66,12 @@ func private @alloc_2d_filled_f32(%arg0: index, %arg1: index, %arg2: f32) -> mem
   return %0 : memref<?x?xf32>
 }
 func private @alloc_2d_increasing_f32(%s1 : index, %s2 : index, %f : f32) -> memref<?x?xf32> {
-  %buf = alloc(%s1, %s2) : memref<?x?xf32> 
+  %buf = memref.alloc(%s1, %s2) : memref<?x?xf32> 
       affine.for %k = 0 to %s1 {
         affine.for %w = 0 to %s2 {
           %v_tmp = index_cast %w: index to i32
           %v = sitofp %v_tmp: i32 to f32
-          store %v, %buf[%k, %w] : memref<?x?xf32>
+          memref.store %v, %buf[%k, %w] : memref<?x?xf32>
         }
       }
   return %buf : memref<?x?xf32>

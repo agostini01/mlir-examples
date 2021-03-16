@@ -8,9 +8,10 @@
 
 
 INPUT=$1
-# LDIR=/home/nico/Development/llvm-project/build-mlir-standalone/lib
-LDIR=/working_dir/llvm-project/build-mlir-standalone/lib
-BDIR=/working_dir/llvm-project/build-mlir-standalone/bin
+LDIR=/home/nico/Development/llvm-project/build-mlir-standalone/lib
+BDIR=/home/nico/Development/llvm-project/build-mlir-standalone/bin
+# LDIR=/working_dir/llvm-project/build-mlir-standalone/lib
+# BDIR=/working_dir/llvm-project/build-mlir-standalone/bin
 
 
 # Check if mlir-cpu-runner printing libraries exist

@@ -70,7 +70,7 @@ func @generic_conv(%filter: memref<?x?x?x?xf32>,
 }
 
 func private @alloc_4d_filled_f32(%arg0: index, %arg1: index, %arg2: index, %arg3: index, %arg4: f32) -> memref<?x?x?x?xf32> {
-  %0 = alloc(%arg0, %arg1, %arg2, %arg3) : memref<?x?x?x?xf32>
+  %0 = memref.alloc(%arg0, %arg1, %arg2, %arg3) : memref<?x?x?x?xf32>
   affine.for %arg5 = 0 to %arg0 {
     affine.for %arg6 = 0 to %arg1 {
       affine.for %arg7 = 0 to %arg2 {
@@ -88,10 +88,10 @@ func private @set_dim_to_val(%arg0: memref<?x?x?x?xf32>, %val: f32) -> () {
     %c1 = constant 1 : index
     %c2 = constant 2 : index
     %c3 = constant 3 : index
-    %0 = dim %arg0, %c0 : memref<?x?x?x?xf32>
-    %1 = dim %arg0, %c1 : memref<?x?x?x?xf32>
-    %2 = dim %arg0, %c2 : memref<?x?x?x?xf32>
-    %3 = dim %arg0, %c3 : memref<?x?x?x?xf32>
+    %0 = memref.dim %arg0, %c0 : memref<?x?x?x?xf32>
+    %1 = memref.dim %arg0, %c1 : memref<?x?x?x?xf32>
+    %2 = memref.dim %arg0, %c2 : memref<?x?x?x?xf32>
+    %3 = memref.dim %arg0, %c3 : memref<?x?x?x?xf32>
   affine.for %arg5 = 0 to %0 {
     affine.for %arg6 = 0 to %1 {
       affine.for %arg7 = 0 to %2 {

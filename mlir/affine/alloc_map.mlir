@@ -6,7 +6,7 @@ func @main() {
   %c4 = constant 4 : index
   %v1 = constant 1.0000000e+00 : f32
 
-  // %rowmajor2d = alloc(%c3, %c4) : memref<?x?xf32, #colmajor_map>
+  // %rowmajor2d = memref.alloc(%c3, %c4) : memref<?x?xf32, #colmajor_map>
   // linalg.fill(%rowmajor2d, %v1) : memref<?x?xf32, #colmajor_map>, f32
   // call @print_memref_2d_rowmaj_f32(%rowmajor2d) : (memref<?x?xf32, #colmajor_map>) -> ()
 
@@ -14,12 +14,12 @@ func @main() {
 }
 
 // func @strided_memref(%ind: index) -> (memref<32x64xf32, affine_map<(i, j)[M] -> (32 + M * i + j)>>) {
-//   %0 = alloc()[%ind] : memref<32x64xf32, affine_map<(i, j)[M] -> (32 + M * i + j)>>
+//   %0 = memref.alloc()[%ind] : memref<32x64xf32, affine_map<(i, j)[M] -> (32 + M * i + j)>>
 //   std.return %0
 // }
 
 func @strided_memref(%ind: index) {
-  %0 = alloc()[%ind] : memref<32x64xf32, affine_map<(i, j)[M] -> (32 + M * i + j)>>
+  %0 = memref.alloc()[%ind] : memref<32x64xf32, affine_map<(i, j)[M] -> (32 + M * i + j)>>
   std.return
 }
 

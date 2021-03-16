@@ -13,11 +13,11 @@ func @main() {
   %v0 = constant 0.50e+00 : f32
   %v3 = constant 0.100000e+00 : f32 
 
-  %colmajor2d = alloc(%c3, %c4) : memref<?x?xf32>
+  %colmajor2d = memref.alloc(%c3, %c4) : memref<?x?xf32>
   linalg.fill(%colmajor2d, %v1) : memref<?x?xf32>, f32
   call @print_memref_2d_f32(%colmajor2d) : (memref<?x?xf32>) -> ()
   
-  %colmajor3d = alloc(%c3, %c4, %c5) : memref<?x?x?xf32>
+  %colmajor3d = memref.alloc(%c3, %c4, %c5) : memref<?x?x?xf32>
   linalg.fill(%colmajor3d, %v1) : memref<?x?x?xf32>, f32
   call @print_memref_3d_f32(%colmajor3d) : (memref<?x?x?xf32>) -> ()
   

@@ -7,7 +7,7 @@ func @main() {
   %c4 = constant 4 : index
   %c5 = constant 5 : index
 
-  %out = alloc(%c4, %c4) : memref<?x?xf32>
+  %out = memref.alloc(%c4, %c4) : memref<?x?xf32>
 
   call @create_identity(%out) : (memref<?x?xf32>) -> ()
   call @print_memref_2d_f32(%out) : (memref<?x?xf32>) -> ()

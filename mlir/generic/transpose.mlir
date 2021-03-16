@@ -9,11 +9,11 @@ func @main() {
 
   %v1 = constant 1.0e+00 : f32
 
-  %in = alloc(%c4, %c4) : memref<?x?xf32>
-  %out = alloc(%c4, %c4) : memref<?x?xf32>
+  %in = memref.alloc(%c4, %c4) : memref<?x?xf32>
+  %out = memref.alloc(%c4, %c4) : memref<?x?xf32>
 
   call @create_identity(%in) : (memref<?x?xf32>) -> ()
-  store %v1, %in[%c3, %c0] : memref<?x?xf32>
+  memref.store %v1, %in[%c3, %c0] : memref<?x?xf32>
   call @print_memref_2d_f32(%in) : (memref<?x?xf32>) -> ()
   
   call @transpose(%in, %out) : (memref<?x?xf32>, memref<?x?xf32>) -> ()
