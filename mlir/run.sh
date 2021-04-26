@@ -59,3 +59,5 @@ $BDIR/mlir-opt tmp.mlir -linalg-bufferize -convert-linalg-to-affine-loops -o tmp
 $BDIR/mlir-opt tmp1.mlir --func-bufferize --tensor-constant-bufferize --tensor-bufferize --finalizing-bufferize -o tmp2.mlir
 $BDIR/mlir-opt tmp2.mlir -lower-affine -convert-scf-to-std  -convert-std-to-llvm -o tmp3.mlir
 $BDIR/mlir-cpu-runner tmp3.mlir -e main -entry-point-result=void -shared-libs=$LDIR/libmlir_runner_utils.so,$LDIR/libmlir_c_runner_utils.so
+
+set +x
